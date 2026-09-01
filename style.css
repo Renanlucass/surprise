@@ -30,7 +30,6 @@
 
     margin: 0;
     padding: 0;
-
     box-sizing: border-box;
 
 }
@@ -46,11 +45,8 @@ html {
 body {
 
     background: var(--black);
-
     color: white;
-
     font-family: var(--sans);
-
     overflow: hidden;
 
 }
@@ -79,7 +75,7 @@ button {
 
 
 /* ======================================================
-   EXPERIÊNCIA PRINCIPAL
+   EXPERIÊNCIA
 ====================================================== */
 
 #experience {
@@ -87,7 +83,6 @@ button {
     position: relative;
 
     width: 100%;
-
     height: 100svh;
 
     overflow: hidden;
@@ -113,7 +108,6 @@ button {
     min-height: 100svh;
 
     opacity: 0;
-
     visibility: hidden;
 
     transform: translateY(35px);
@@ -131,7 +125,6 @@ button {
 .final-screen.active {
 
     opacity: 1;
-
     visibility: visible;
 
     transform: translateY(0);
@@ -167,7 +160,6 @@ button {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     transition:
@@ -180,7 +172,6 @@ button {
 .loader.hidden {
 
     opacity: 0;
-
     visibility: hidden;
 
 }
@@ -207,7 +198,6 @@ button {
 .loader-bar {
 
     width: 110px;
-
     height: 1px;
 
     background: rgba(255,255,255,.15);
@@ -227,7 +217,8 @@ button {
 
     background: var(--gold);
 
-    animation: loading 1.5s ease infinite;
+    animation:
+        loading 1.5s ease infinite;
 
 }
 
@@ -267,7 +258,6 @@ button {
     position: fixed;
 
     top: 0;
-
     left: 0;
     right: 0;
 
@@ -278,7 +268,6 @@ button {
     display: flex;
 
     justify-content: space-between;
-
     align-items: center;
 
 }
@@ -293,6 +282,8 @@ button {
     font-family: var(--serif);
 
     font-size: 1.3rem;
+
+    transition: color .4s ease;
 
 }
 
@@ -332,7 +323,6 @@ button {
 .music-button:hover {
 
     background: white;
-
     color: black;
 
 }
@@ -379,7 +369,6 @@ button {
     position: absolute;
 
     width: 3px;
-
     height: 3px;
 
     border-radius: 50%;
@@ -434,7 +423,6 @@ button {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
@@ -465,7 +453,6 @@ button {
     position: absolute;
 
     width: 55vw;
-
     height: 55vw;
 
     border-radius: 50%;
@@ -483,7 +470,6 @@ button {
     0%,100% {
 
         transform: scale(.8);
-
         opacity: .4;
 
     }
@@ -491,7 +477,6 @@ button {
     50% {
 
         transform: scale(1.1);
-
         opacity: 1;
 
     }
@@ -799,7 +784,7 @@ button {
     display: grid;
 
     grid-template-columns:
-        repeat(2, 1fr);
+        repeat(3, 1fr);
 
     gap: 15px;
 
@@ -841,7 +826,6 @@ button {
     position: absolute;
 
     width: 180px;
-
     height: 180px;
 
     border-radius: 50%;
@@ -849,7 +833,6 @@ button {
     background: rgba(180,154,120,.1);
 
     right: -70px;
-
     bottom: -70px;
 
     transition:
@@ -879,7 +862,7 @@ button {
 
 .discovery-card.completed {
 
-    background: #e8e0d5;
+    background: var(--paper-2);
 
 }
 
@@ -900,7 +883,6 @@ button {
     position: absolute;
 
     right: 30px;
-
     top: 25px;
 
     font-family: var(--serif);
@@ -931,14 +913,14 @@ button {
 
     font-size: .78rem;
 
+    line-height: 1.6;
+
     margin-top: 8px;
 
 }
 
 
 .card-action {
-
-    position: absolute;
 
     bottom: 28px;
 
@@ -1069,13 +1051,11 @@ button {
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
     padding: 20px;
 
     opacity: 0;
-
     visibility: hidden;
 
     transition:
@@ -1088,7 +1068,6 @@ button {
 .experience-modal.open {
 
     opacity: 1;
-
     visibility: visible;
 
 }
@@ -1138,8 +1117,7 @@ button {
 }
 
 
-.experience-modal.open
-.modal-content {
+.experience-modal.open .modal-content {
 
     transform: none;
 
@@ -1151,8 +1129,9 @@ button {
     position: absolute;
 
     top: 15px;
-
     right: 20px;
+
+    z-index: 5;
 
     border: 0;
 
@@ -1187,7 +1166,6 @@ button {
     from {
 
         opacity: 0;
-
         transform: translateY(15px);
 
     }
@@ -1195,7 +1173,6 @@ button {
     to {
 
         opacity: 1;
-
         transform: none;
 
     }
@@ -1243,7 +1220,15 @@ button {
 }
 
 
-.modal-photo {
+/* ======================================================
+   CARROSSEL
+====================================================== */
+
+.photo-carousel {
+
+    position: relative;
+
+    width: 100%;
 
     aspect-ratio: 4 / 5;
 
@@ -1254,33 +1239,186 @@ button {
 }
 
 
-.modal-photo.landscape {
+.carousel-track {
 
-    aspect-ratio: 16 / 10;
+    width: 100%;
+    height: 100%;
+
+    position: relative;
 
 }
 
 
-.modal-photo img {
+.carousel-slide {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0;
+
+    transform: scale(1.04);
+
+    pointer-events: none;
+
+    transition:
+        opacity .6s ease,
+        transform .8s cubic-bezier(.2,.7,.2,1);
+
+}
+
+
+.carousel-slide.active {
+
+    opacity: 1;
+
+    transform: scale(1);
+
+    pointer-events: auto;
+
+}
+
+
+.carousel-slide img {
 
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
 
+    display: block;
+
+}
+
+
+/* ======================================================
+   BOTÕES DO CARROSSEL
+====================================================== */
+
+.carousel-button {
+
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.45);
+
+    background: rgba(0,0,0,.3);
+
+    backdrop-filter: blur(8px);
+
+    color: white;
+
+    font-size: 1rem;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 5;
+
     transition:
-        transform 1s ease;
+        background .3s ease,
+        transform .3s ease;
 
 }
 
 
-.modal-photo:hover img {
+.carousel-button:hover {
 
-    transform: scale(1.03);
+    background: rgba(0,0,0,.65);
 
 }
 
+
+.carousel-prev {
+
+    left: 18px;
+
+}
+
+
+.carousel-next {
+
+    right: 18px;
+
+}
+
+
+.carousel-dots {
+
+    position: absolute;
+
+    bottom: 18px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    gap: 7px;
+
+    z-index: 5;
+
+}
+
+
+.carousel-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    border: 0;
+
+    padding: 0;
+
+    background: rgba(255,255,255,.45);
+
+    transition:
+        transform .3s ease,
+        background .3s ease;
+
+}
+
+
+.carousel-dot.active {
+
+    background: white;
+
+    transform: scale(1.5);
+
+}
+
+
+.carousel-counter {
+
+    text-align: center;
+
+    color: var(--muted);
+
+    font-size: .65rem;
+
+    letter-spacing: .1em;
+
+    margin-top: 12px;
+
+}
+
+
+/* ======================================================
+   TEXTO MODAL
+====================================================== */
 
 .modal-text {
 
@@ -1291,6 +1429,17 @@ button {
     line-height: 1.85;
 
     margin: 30px auto;
+
+}
+
+
+.modal-text strong {
+
+    color: var(--black);
+
+    font-family: var(--serif);
+
+    font-size: 1.1rem;
 
 }
 
@@ -1327,6 +1476,10 @@ button {
 }
 
 
+/* ======================================================
+   NÚMERO 17
+====================================================== */
+
 .modal-number {
 
     font-family: var(--serif);
@@ -1344,6 +1497,10 @@ button {
 
 }
 
+
+/* ======================================================
+   MENSAGEM
+====================================================== */
 
 .words-card {
 
@@ -1391,7 +1548,6 @@ button {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
@@ -1410,7 +1566,6 @@ button {
     position: absolute;
 
     width: 60vw;
-
     height: 60vw;
 
     border-radius: 50%;
@@ -1434,15 +1589,11 @@ button {
 @keyframes finalGlow {
 
     from {
-
         transform: scale(.8);
-
     }
 
     to {
-
         transform: scale(1.15);
-
     }
 
 }
@@ -1529,7 +1680,6 @@ button {
 .final-photo img {
 
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
@@ -1561,8 +1711,79 @@ button {
 
 
 /* ======================================================
+   LOGO / TOPO NAS SEÇÕES CLARAS
+====================================================== */
+
+body:has(.discovery-screen.active) .logo {
+
+    color: var(--black);
+
+}
+
+
+body:has(.discovery-screen.active) .music-button {
+
+    color: var(--black);
+
+    border-color:
+        rgba(20,20,20,.25);
+
+}
+
+
+body:has(.discovery-screen.active) .music-button:hover {
+
+    background: var(--black);
+
+    color: white;
+
+}
+
+
+/* ======================================================
+   PRIMEIRA E ÚLTIMA SEÇÃO
+====================================================== */
+
+body:has(#inicio.active) .logo,
+body:has(#finalScreen.active) .logo {
+
+    color: white;
+
+}
+
+
+body:has(#inicio.active) .music-button,
+body:has(#finalScreen.active) .music-button {
+
+    color: white;
+
+    border-color:
+        rgba(255,255,255,.35);
+
+}
+
+
+/* ======================================================
    MOBILE
 ====================================================== */
+
+@media (max-width: 850px) {
+
+    .discovery-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .discovery-card {
+
+        min-height: 220px;
+
+    }
+
+}
+
 
 @media (max-width: 700px) {
 
@@ -1591,7 +1812,6 @@ button {
     .hero-glow {
 
         width: 90vw;
-
         height: 90vw;
 
     }
@@ -1604,9 +1824,9 @@ button {
     }
 
 
-    .discovery-grid {
+    .discovery-header h2 {
 
-        grid-template-columns: 1fr;
+        font-size: 3.5rem;
 
     }
 
@@ -1621,6 +1841,8 @@ button {
     .discovery-card h3 {
 
         margin-top: 60px;
+
+        font-size: 1.8rem;
 
     }
 
@@ -1642,45 +1864,50 @@ button {
     }
 
 
+    .photo-carousel {
+
+        aspect-ratio: 4 / 5;
+
+    }
+
+
+    .carousel-button {
+
+        width: 40px;
+        height: 40px;
+
+    }
+
+
+    .carousel-prev {
+
+        left: 10px;
+
+    }
+
+
+    .carousel-next {
+
+        right: 10px;
+
+    }
+
+
     .words-card {
 
         padding: 25px;
 
     }
 
+
+    .final-content {
+
+        width: 88%;
+
+    }
+
 }
 
-.discovery-screen.active ~ * {
-    color: inherit;
-}
-
-/* Logo preta quando a seção de descobertas estiver ativa */
-body:has(.discovery-screen.active) .logo {
-    color: var(--black);
-}
-
-body:has(.discovery-screen.active) .music-button {
-    color: var(--black);
-    border-color: rgba(20, 20, 20, .25);
-}
-
-body:has(.discovery-screen.active) .music-button:hover {
-    background: var(--black);
-    color: white;
-}
-
-
-/* Primeira e última seção — logo branca */
-body:has(#inicio.active) .logo,
-body:has(#finalScreen.active) .logo {
-    color: white;
-}
-
-body:has(#inicio.active) .music-button,
-body:has(#finalScreen.active) .music-button {
-    color: white;
-    border-color: rgba(255, 255, 255, .35);
-}
 
 /* ======================================================
    ACESSIBILIDADE
@@ -1707,4 +1934,3 @@ body:has(#finalScreen.active) .music-button {
     }
 
 }
-

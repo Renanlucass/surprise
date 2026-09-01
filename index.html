@@ -17,14 +17,11 @@
 
     <title>Ana Júlia — 17</title>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link
         rel="preconnect"
-        href="https://fonts.googleapis.com"
+        href="https://fonts.gstatic.com"
         crossorigin
     >
 
@@ -72,7 +69,6 @@
 </div>
 
 
-
 <!-- ======================================================
      TOPO
 ====================================================== -->
@@ -93,9 +89,7 @@
         aria-label="Controlar música"
     >
 
-        <span>
-            ♪
-        </span>
+        <span>♪</span>
 
         <small>
             música
@@ -106,7 +100,6 @@
 </header>
 
 
-
 <!-- ======================================================
      PARTÍCULAS
 ====================================================== -->
@@ -115,7 +108,6 @@
     class="particles"
     id="particles"
 ></div>
-
 
 
 <!-- ======================================================
@@ -144,13 +136,9 @@
 
 
         <h1>
-
             Ana
-
             <br>
-
             <em>Júlia</em>
-
         </h1>
 
 
@@ -204,7 +192,6 @@
 </section>
 
 
-
 <!-- ======================================================
      TELA 02 — DESCOBERTAS
 ====================================================== -->
@@ -224,27 +211,27 @@
             </p>
 
             <h2>
-                Você pode
-                <em>explorar.</em>
+                Algumas coisas
+                <em>para você.</em>
             </h2>
 
             <p class="discovery-description">
 
-                Existem algumas coisas
-                escondidas por aqui.
+                Explore cada uma delas.
 
                 <br>
 
-                Descubra todas para desbloquear
-                a última surpresa.
+                No final, tem uma última surpresa
+                esperando por você.
 
             </p>
 
         </div>
 
 
-
-        <!-- PROGRESSO -->
+        <!-- ==================================================
+             PROGRESSO
+        ================================================== -->
 
         <div class="progress-area">
 
@@ -255,7 +242,7 @@
                 </span>
 
                 <strong id="progressText">
-                    0 / 4
+                    0 / 3
                 </strong>
 
             </div>
@@ -263,26 +250,27 @@
 
             <div class="progress-bar">
 
-                <span
-                    id="progressBar"
-                ></span>
+                <span id="progressBar"></span>
 
             </div>
 
         </div>
 
 
-
-        <!-- CARDS -->
+        <!-- ==================================================
+             CARDS
+        ================================================== -->
 
         <div class="discovery-grid">
 
 
-            <!-- MEMÓRIA -->
+            <!-- ==================================================
+                 01 — FOTOS
+            ================================================== -->
 
             <button
                 class="discovery-card"
-                data-card="memory"
+                data-card="photos"
             >
 
                 <span class="card-number">
@@ -290,26 +278,27 @@
                 </span>
 
                 <span class="card-icon">
-                    ◇
+                    ♡
                 </span>
 
                 <h3>
-                    Uma memória
+                    Algumas fotos
                 </h3>
 
                 <p>
-                    Antes de tudo isso...
+                    Alguns momentos que merecem ficar guardados.
                 </p>
 
                 <span class="card-action">
-                    descobrir →
+                    abrir álbum →
                 </span>
 
             </button>
 
 
-
-            <!-- 17 -->
+            <!-- ==================================================
+                 02 — NOVA FASE
+            ================================================== -->
 
             <button
                 class="discovery-card"
@@ -339,12 +328,13 @@
             </button>
 
 
-
-            <!-- NÓS -->
+            <!-- ==================================================
+                 03 — MENSAGEM
+            ================================================== -->
 
             <button
                 class="discovery-card"
-                data-card="us"
+                data-card="message"
             >
 
                 <span class="card-number">
@@ -352,50 +342,19 @@
                 </span>
 
                 <span class="card-icon">
-                    ♡
-                </span>
-
-                <h3>
-                    Nós
-                </h3>
-
-                <p>
-                    Uma história que vem de longe.
-                </p>
-
-                <span class="card-action">
-                    descobrir →
-                </span>
-
-            </button>
-
-
-
-            <!-- PALAVRAS -->
-
-            <button
-                class="discovery-card"
-                data-card="words"
-            >
-
-                <span class="card-number">
-                    04
-                </span>
-
-                <span class="card-icon">
                     ✦
                 </span>
 
                 <h3>
-                    Algumas palavras
+                    Uma pequena mensagem
                 </h3>
 
                 <p>
-                    Porque faltava dizer uma coisa.
+                    Porque algumas coisas merecem ser ditas.
                 </p>
 
                 <span class="card-action">
-                    descobrir →
+                    abrir mensagem →
                 </span>
 
             </button>
@@ -404,8 +363,9 @@
         </div>
 
 
-
-        <!-- DESBLOQUEIO FINAL -->
+        <!-- ==================================================
+             DESBLOQUEIO FINAL
+        ================================================== -->
 
         <div
             class="final-unlock"
@@ -433,7 +393,6 @@
 </section>
 
 
-
 <!-- ======================================================
      MODAL
 ====================================================== -->
@@ -457,67 +416,264 @@
         </button>
 
 
-
         <!-- ==================================================
-             MEMÓRIA
+             01 — FOTOS
         ================================================== -->
 
         <div
             class="modal-page"
-            data-modal="memory"
+            data-modal="photos"
         >
 
             <p class="modal-tag">
-                01 / UMA MEMÓRIA
+                01 / NOSSAS FOTOS
             </p>
 
+
             <h2>
-                Desde pequenos,
-                <em>não é?</em>
+                Alguns momentos
+                <em>para guardar.</em>
             </h2>
 
 
-            <div class="modal-photo">
+            <!-- CARROSSEL -->
 
-                <img
-                    src="assets/fotos/foto-01.jpg"
-                    alt="Uma lembrança de vocês"
+            <div class="photo-carousel">
+
+                <div class="carousel-track">
+                    <div class="carousel-slide active">
+
+                        <img
+                            src="assets/fotos/image1.jpeg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+                    <div class="carousel-slide active">
+
+                        <img
+                            src="assets/fotos/image2.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+
+                    <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image3.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+
+                    <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image4.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+
+                    <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image5.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+
+                    <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image6.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+
+                    <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image7.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+                                        <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image8.webp"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+                                        <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image9.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+                                        <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image10.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+                                        <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image11.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+                                        <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image12.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+                                        <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image13.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+                                        <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image14.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+                                                            <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image15.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+                                                            <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image16.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+
+                    <div class="carousel-slide">
+
+                        <img
+                            src="assets/fotos/image17.jpg"
+                            alt="Momento especial"
+                        >
+
+                    </div>
+                    
+
+                </div>
+
+
+                <!-- BOTÃO ANTERIOR -->
+
+                <button
+                    class="carousel-button carousel-prev"
+                    id="carouselPrev"
+                    aria-label="Foto anterior"
                 >
+                    ←
+                </button>
+
+
+                <!-- BOTÃO PRÓXIMO -->
+
+                <button
+                    class="carousel-button carousel-next"
+                    id="carouselNext"
+                    aria-label="Próxima foto"
+                >
+                    →
+                </button>
+
+
+                <!-- INDICADORES -->
+
+                <div
+                    class="carousel-dots"
+                    id="carouselDots"
+                ></div>
 
             </div>
 
 
+            <p class="carousel-counter">
+                <span id="carouselCurrent">
+                    1
+                </span>
+
+                /
+
+                <span id="carouselTotal">
+                    7
+                </span>
+            </p>
+
+
             <p class="modal-text">
 
-                A gente se conhece desde pequeno.
+                Algumas fotos nossas, outras de momentos
+                especiais e outras simplesmente porque
+                fazem parte dessa história.
 
                 <br><br>
 
-                E é engraçado pensar em quantas
-                coisas mudaram desde aquela época.
-
-                Algumas fases ficaram para trás,
-                mas algumas pessoas continuaram
-                fazendo parte da história.
+                No fim, são essas pequenas lembranças
+                que acabam ficando.
 
             </p>
 
 
             <button
                 class="modal-done"
-                data-complete="memory"
+                data-complete="photos"
             >
-
-                guardar essa memória ✓
-
+                guardar essas lembranças ✓
             </button>
 
         </div>
 
 
-
         <!-- ==================================================
-             17
+             02 — NOVA FASE
         ================================================== -->
 
         <div
@@ -552,6 +708,20 @@
                 para conhecer e histórias que
                 ainda nem começaram.
 
+                <br><br>
+
+                Que essa fase venha com
+                liberdade, aprendizado,
+                boas escolhas e muitos
+                momentos daqueles que
+                fazem a gente pensar:
+
+                <br><br>
+
+                <strong>
+                    "Valeu a pena."
+                </strong>
+
             </p>
 
 
@@ -559,94 +729,29 @@
                 class="modal-done"
                 data-complete="seventeen"
             >
-
                 guardar essa descoberta ✓
-
             </button>
 
         </div>
 
 
-
         <!-- ==================================================
-             NÓS
+             03 — MENSAGEM
         ================================================== -->
 
         <div
             class="modal-page"
-            data-modal="us"
+            data-modal="message"
         >
 
             <p class="modal-tag">
-                03 / NÓS
+                03 / MENSAGEM DE ANIVERSÁRIO
             </p>
 
 
             <h2>
-
-                Algumas pessoas
-                <em>crescem com a gente.</em>
-
-            </h2>
-
-
-            <div class="modal-photo landscape">
-
-                <img
-                    src="assets/fotos/foto-07.jpg"
-                    alt="Ana Júlia e você"
-                >
-
-            </div>
-
-
-            <p class="modal-text">
-
-                Não precisa de uma grande
-                explicação.
-
-                <br><br>
-
-                São anos de convivência,
-                fases diferentes e momentos
-                que acabaram construindo uma
-                história que vale a pena guardar.
-
-            </p>
-
-
-            <button
-                class="modal-done"
-                data-complete="us"
-            >
-
-                guardar essa descoberta ✓
-
-            </button>
-
-        </div>
-
-
-
-        <!-- ==================================================
-             PALAVRAS
-        ================================================== -->
-
-        <div
-            class="modal-page"
-            data-modal="words"
-        >
-
-            <p class="modal-tag">
-                04 / ALGUMAS PALAVRAS
-            </p>
-
-
-            <h2>
-
-                Nem tudo precisa
-                <em>de muitas palavras.</em>
-
+                Feliz aniversário,
+                <em>Ana Júlia.</em>
             </h2>
 
 
@@ -659,20 +764,33 @@
 
                 <p>
 
-                    Que você continue vivendo
-                    do seu jeito, descobrindo
-                    novas coisas e colecionando
-                    histórias boas.
+                    Hoje é seu dia, então espero
+                    que você aproveite muito.
 
                     <br><br>
 
-                    E que nunca faltem motivos
-                    para olhar para trás e pensar:
+                    A gente se conhece desde pequeno
+                    e, mesmo com todas as mudanças,
+                    é muito bom poder olhar para trás
+                    e perceber quantas histórias já
+                    passaram por nós.
+
+                    <br><br>
+
+                    Espero que seus 17 anos tragam
+                    coisas novas, pessoas boas,
+                    experiências incríveis e muitos
+                    motivos para sorrir.
+
+                    <br><br>
+
+                    Continue sendo essa pessoa
+                    especial do seu jeito.
 
                     <br><br>
 
                     <strong>
-                        "Foi uma época boa."
+                        Feliz 17 anos! ❤️
                     </strong>
 
                 </p>
@@ -682,11 +800,9 @@
 
             <button
                 class="modal-done"
-                data-complete="words"
+                data-complete="message"
             >
-
-                guardar essas palavras ✓
-
+                guardar a mensagem ✓
             </button>
 
         </div>
@@ -694,7 +810,6 @@
     </div>
 
 </div>
-
 
 
 <!-- ======================================================
@@ -751,7 +866,7 @@
         <div class="final-photo">
 
             <img
-                src="assets/fotos/foto-08.jpg"
+                src="assets/fotos/image-principal.jpg"
                 alt="Ana Júlia"
             >
 
@@ -772,7 +887,6 @@
 </main>
 
 
-
 <!-- ======================================================
      ÁUDIO
 ====================================================== -->
@@ -781,7 +895,6 @@
     id="birthdayMusic"
     preload="auto"
 ></audio>
-
 
 
 <script src="script.js"></script>

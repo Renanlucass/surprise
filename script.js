@@ -3,24 +3,33 @@
 ====================================================== */
 
 const loader = document.querySelector("#loader");
+
 const startButton = document.querySelector("#startButton");
+
 const discovery = document.querySelector("#discovery");
 
 const cards = document.querySelectorAll(".discovery-card");
 
 const modal = document.querySelector("#modal");
+
 const modalClose = document.querySelector("#modalClose");
+
 const modalPages = document.querySelectorAll(".modal-page");
+
 const doneButtons = document.querySelectorAll(".modal-done");
 
 const progressText = document.querySelector("#progressText");
+
 const progressBar = document.querySelector("#progressBar");
 
 const finalUnlock = document.querySelector("#finalUnlock");
+
 const finalButton = document.querySelector("#finalButton");
+
 const finalScreen = document.querySelector("#finalScreen");
 
 const musicButton = document.querySelector("#musicButton");
+
 const music = document.querySelector("#birthdayMusic");
 
 const particles = document.querySelector("#particles");
@@ -31,196 +40,48 @@ const particles = document.querySelector("#particles");
 ====================================================== */
 
 const MUSIC_MAIN =
-    "assets/musica/mirrors.mp3";
+    "assets/musica/musica-principal.mp3";
 
 const MUSIC_FINAL =
-    "assets/musica/mirrors.mp3";
+    "assets/musica/musica-final.mp3";
 
 
 let currentMusic = null;
+
 let musicStarted = false;
+
 let musicChanging = false;
 
 
 /* ======================================================
-   ESTADO DA EXPERIÊNCIA
+   ESTADO
 ====================================================== */
 
 const discovered = new Set();
 
-const totalDiscoveries = 4;
+const totalDiscoveries = 3;
 
 
 /* ======================================================
-   TELAS
+   ESTADO DAS TELAS
 ====================================================== */
 
-const screens = [
-
-    document.querySelector("#inicio"),
-
-    document.querySelector("#discovery"),
-
-    document.querySelector("#finalScreen")
-
-];
-
-
-let currentScreen = 0;
-
-
-/* ======================================================
-   NAVEGAÇÃO CONTROLADA
-====================================================== */
-
-function showScreen(index) {
-
-    if (
-        index < 0 ||
-        index >= screens.length
-    ) {
-        return;
-    }
-
-
-    screens.forEach(
-        (screen, i) => {
-
-            screen.classList.remove(
-                "active",
-                "previous"
-            );
-
-
-            if (i === index) {
-
-                screen.classList.add(
-                    "active"
-                );
-
-            }
-
-
-            if (i < index) {
-
-                screen.classList.add(
-                    "previous"
-                );
-
-            }
-
-        }
-    );
-
-
-    currentScreen = index;
-
-
-    /*
-       Quando entramos novamente na tela
-       de descobertas, começamos do topo.
-    */
-
-    if (
-        screens[index] === discovery
-    ) {
-
-        discovery.scrollTop = 0;
-
-    }
-
-}
-
-
-/* ======================================================
-   INICIAR NA PRIMEIRA TELA
-====================================================== */
-
-showScreen(0);
-
-
-/* ======================================================
-   BLOQUEAR SCROLL ENTRE AS TELAS
-====================================================== */
-
-/*
-   O scroll não poderá levar para outra seção.
-
-   A única tela que possui scroll próprio é
-   a tela de descobertas.
-*/
-
-window.addEventListener(
-    "wheel",
-    event => {
-
-        /*
-           Se não estamos na tela de descobertas,
-           bloqueamos o scroll.
-        */
-
-        if (
-            currentScreen !== 1 &&
-            !modal.classList.contains("open")
-        ) {
-
-            event.preventDefault();
-
-        }
-
-    },
-    {
-        passive: false
-    }
-);
-
-
-/*
-   Bloqueia também gestos de toque que
-   poderiam tentar trocar de seção.
-*/
-
-window.addEventListener(
-    "touchmove",
-    event => {
-
-        if (
-            currentScreen !== 1 &&
-            !modal.classList.contains("open")
-        ) {
-
-            event.preventDefault();
-
-        }
-
-    },
-    {
-        passive: false
-    }
-);
+let currentScreen = "inicio";
 
 
 /* ======================================================
    LOADER
 ====================================================== */
 
-window.addEventListener(
-    "load",
-    () => {
+window.addEventListener("load", () => {
 
-        setTimeout(
-            () => {
+    setTimeout(() => {
 
-                loader.classList.add(
-                    "hidden"
-                );
+        loader.classList.add("hidden");
 
-            },
-            1200
-        );
+    }, 1200);
 
-    }
-);
+});
 
 
 /* ======================================================
@@ -235,21 +96,13 @@ function createParticles() {
             : 35;
 
 
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
+    for (let i = 0; i < amount; i++) {
 
         const particle =
-            document.createElement(
-                "span"
-            );
+            document.createElement("span");
 
 
-        particle.classList.add(
-            "particle"
-        );
+        particle.classList.add("particle");
 
 
         particle.style.left =
@@ -276,9 +129,7 @@ function createParticles() {
             `${size}px`;
 
 
-        particles.appendChild(
-            particle
-        );
+        particles.appendChild(particle);
 
     }
 
@@ -292,30 +143,54 @@ createParticles();
    INICIAR EXPERIÊNCIA
 ====================================================== */
 
-startButton.addEventListener(
-    "click",
-    () => {
+startButton.addEventListener("click", () => {
 
-        /*
-           Agora não usamos mais
-           scrollIntoView().
+    switchScreen(
+        "inicio",
+        "discovery"
+    );
 
-           A tela simplesmente muda
-           para a próxima etapa.
-        */
+    startMainMusic();
 
-        showScreen(1);
+});
 
 
-        /*
-           Como o clique foi feito pela pessoa,
-           o navegador permite iniciar o áudio.
-        */
+/* ======================================================
+   TROCA DE TELA
+====================================================== */
 
-        startMainMusic();
+function switchScreen(
+    fromId,
+    toId
+) {
+
+    const from =
+        document.getElementById(fromId);
+
+    const to =
+        document.getElementById(toId);
+
+
+    if (!from || !to) {
+
+        return;
 
     }
-);
+
+
+    from.classList.remove("active");
+
+    from.classList.add("previous");
+
+
+    to.classList.remove("previous");
+
+    to.classList.add("active");
+
+
+    currentScreen = toId;
+
+}
 
 
 /* ======================================================
@@ -324,53 +199,30 @@ startButton.addEventListener(
 
 async function startMainMusic() {
 
-    /*
-       Impede iniciar a mesma música várias vezes.
-    */
-
-    if (
-        musicStarted
-    ) {
+    if (musicStarted) {
 
         return;
 
     }
 
 
-    musicStarted =
-        true;
+    musicStarted = true;
+
+    currentMusic = "main";
 
 
-    currentMusic =
-        "main";
+    music.src = MUSIC_MAIN;
 
+    music.loop = true;
 
-    music.src =
-        MUSIC_MAIN;
-
-
-    music.loop =
-        true;
-
-
-    music.volume =
-        0;
+    music.volume = 0;
 
 
     try {
 
         await music.play();
 
-
-        musicButton.classList.add(
-            "playing"
-        );
-
-
-        /*
-           A música começa baixinha
-           e aumenta suavemente.
-        */
+        musicButton.classList.add("playing");
 
         fadeVolume(
             0,
@@ -378,12 +230,10 @@ async function startMainMusic() {
             1800
         );
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.log(
-            "O navegador bloqueou a reprodução da música."
+            "O navegador bloqueou a reprodução automática."
         );
 
     }
@@ -405,8 +255,7 @@ function fadeVolume(
         performance.now();
 
 
-    music.volume =
-        from;
+    music.volume = from;
 
 
     function animateVolume(now) {
@@ -422,10 +271,6 @@ function fadeVolume(
             );
 
 
-        /*
-           Curva suave para o volume.
-        */
-
         const eased =
             1 -
             Math.pow(
@@ -436,12 +281,11 @@ function fadeVolume(
 
         music.volume =
             from +
-            (to - from) * eased;
+            (to - from) *
+            eased;
 
 
-        if (
-            progress < 1
-        ) {
+        if (progress < 1) {
 
             requestAnimationFrame(
                 animateVolume
@@ -460,32 +304,20 @@ function fadeVolume(
 
 
 /* ======================================================
-   TROCAR PARA MÚSICA FINAL
+   MÚSICA FINAL
 ====================================================== */
 
 async function startFinalMusic() {
 
-    /*
-       Evita duas trocas simultâneas.
-    */
-
-    if (
-        musicChanging
-    ) {
+    if (musicChanging) {
 
         return;
 
     }
 
 
-    musicChanging =
-        true;
+    musicChanging = true;
 
-
-    /*
-       Abaixa suavemente a música
-       que está tocando.
-    */
 
     fadeVolume(
         music.volume,
@@ -494,62 +326,37 @@ async function startFinalMusic() {
     );
 
 
-    await new Promise(
-        resolve => {
+    await new Promise(resolve => {
 
-            setTimeout(
-                resolve,
-                1500
-            );
+        setTimeout(
+            resolve,
+            1500
+        );
 
-        }
-    );
+    });
 
-
-    /*
-       Para a música anterior.
-    */
 
     music.pause();
 
-    music.currentTime =
-        0;
+    music.currentTime = 0;
 
+    music.src = MUSIC_FINAL;
 
-    /*
-       Carrega a música final.
-    */
+    music.loop = true;
 
-    music.src =
-        MUSIC_FINAL;
+    music.volume = 0;
 
-
-    music.loop =
-        true;
-
-
-    music.volume =
-        0;
-
-
-    currentMusic =
-        "final";
+    currentMusic = "final";
 
 
     try {
 
         await music.play();
 
-
         musicButton.classList.add(
             "playing"
         );
 
-
-        /*
-           A música final entra
-           gradualmente.
-        */
 
         fadeVolume(
             0,
@@ -557,9 +364,7 @@ async function startFinalMusic() {
             2200
         );
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.log(
             "A música final não pôde ser reproduzida."
@@ -568,8 +373,7 @@ async function startFinalMusic() {
     }
 
 
-    musicChanging =
-        false;
+    musicChanging = false;
 
 }
 
@@ -582,26 +386,17 @@ musicButton.addEventListener(
     "click",
     async () => {
 
-        /*
-           Se estiver pausada, toca.
-        */
-
-        if (
-            music.paused
-        ) {
+        if (music.paused) {
 
             try {
 
                 await music.play();
 
-
                 musicButton.classList.add(
                     "playing"
                 );
 
-            }
-
-            catch (error) {
+            } catch (error) {
 
                 console.log(
                     "Não foi possível reproduzir a música."
@@ -609,16 +404,9 @@ musicButton.addEventListener(
 
             }
 
-        }
-
-        /*
-           Se estiver tocando, pausa.
-        */
-
-        else {
+        } else {
 
             music.pause();
-
 
             musicButton.classList.remove(
                 "playing"
@@ -634,26 +422,22 @@ musicButton.addEventListener(
    ABRIR CARDS
 ====================================================== */
 
-cards.forEach(
-    card => {
+cards.forEach(card => {
 
-        card.addEventListener(
-            "click",
-            () => {
+    card.addEventListener(
+        "click",
+        () => {
 
-                const cardName =
-                    card.dataset.card;
+            const cardName =
+                card.dataset.card;
 
 
-                openModal(
-                    cardName
-                );
+            openModal(cardName);
 
-            }
-        );
+        }
+    );
 
-    }
-);
+});
 
 
 /* ======================================================
@@ -662,45 +446,38 @@ cards.forEach(
 
 function openModal(name) {
 
-    /*
-       Esconde todas as páginas do modal.
-    */
+    modalPages.forEach(page => {
 
-    modalPages.forEach(
-        page => {
+        page.classList.remove(
+            "active"
+        );
 
-            page.classList.remove(
+
+        if (
+            page.dataset.modal === name
+        ) {
+
+            page.classList.add(
                 "active"
             );
 
-
-            /*
-               Mostra somente a página
-               correspondente ao card.
-            */
-
-            if (
-                page.dataset.modal === name
-            ) {
-
-                page.classList.add(
-                    "active"
-                );
-
-            }
-
         }
-    );
+
+    });
 
 
-    modal.classList.add(
-        "open"
-    );
-
+    modal.classList.add("open");
 
     document.body.classList.add(
         "locked"
     );
+
+
+    if (name === "photos") {
+
+        updateCarousel();
+
+    }
 
 }
 
@@ -752,7 +529,7 @@ modal.addEventListener(
 
 
 /* ======================================================
-   TECLA ESC
+   ESC
 ====================================================== */
 
 document.addEventListener(
@@ -775,29 +552,24 @@ document.addEventListener(
    CONCLUIR DESCOBERTA
 ====================================================== */
 
-doneButtons.forEach(
-    button => {
+doneButtons.forEach(button => {
 
-        button.addEventListener(
-            "click",
-            () => {
+    button.addEventListener(
+        "click",
+        () => {
 
-                const name =
-                    button.dataset.complete;
-
-
-                completeDiscovery(
-                    name
-                );
+            const name =
+                button.dataset.complete;
 
 
-                closeModal();
+            completeDiscovery(name);
 
-            }
-        );
+            closeModal();
 
-    }
-);
+        }
+    );
+
+});
 
 
 /* ======================================================
@@ -805,11 +577,6 @@ doneButtons.forEach(
 ====================================================== */
 
 function completeDiscovery(name) {
-
-    /*
-       Se já foi descoberta,
-       não fazemos novamente.
-    */
 
     if (
         discovered.has(name)
@@ -820,14 +587,8 @@ function completeDiscovery(name) {
     }
 
 
-    discovered.add(
-        name
-    );
+    discovered.add(name);
 
-
-    /*
-       Marca visualmente o card.
-    */
 
     const card =
         document.querySelector(
@@ -848,16 +609,7 @@ function completeDiscovery(name) {
     }
 
 
-    /*
-       Atualiza a barra.
-    */
-
     updateProgress();
-
-
-    /*
-       Cria o efeito visual.
-    */
 
     createDiscoveryEffect();
 
@@ -865,7 +617,7 @@ function completeDiscovery(name) {
 
 
 /* ======================================================
-   ATUALIZAR PROGRESSO
+   PROGRESSO
 ====================================================== */
 
 function updateProgress() {
@@ -874,38 +626,18 @@ function updateProgress() {
         discovered.size;
 
 
-    /*
-       Texto:
-
-       0 / 4
-       1 / 4
-       2 / 4
-       etc.
-    */
-
     progressText.textContent =
         `${amount} / ${totalDiscoveries}`;
 
 
-    /*
-       Calcula porcentagem.
-    */
-
     const percentage =
-        (
-            amount /
-            totalDiscoveries
-        ) * 100;
+        (amount / totalDiscoveries) *
+        100;
 
 
     progressBar.style.width =
         `${percentage}%`;
 
-
-    /*
-       Quando chegar a 4/4,
-       libera a última surpresa.
-    */
 
     if (
         amount === totalDiscoveries
@@ -919,7 +651,7 @@ function updateProgress() {
 
 
 /* ======================================================
-   LIBERAR ÚLTIMA SURPRESA
+   LIBERAR SURPRESA FINAL
 ====================================================== */
 
 function unlockFinal() {
@@ -932,7 +664,7 @@ function unlockFinal() {
 
 
 /* ======================================================
-   EFEITO AO DESCOBRIR
+   EFEITO DE DESCOBERTA
 ====================================================== */
 
 function createDiscoveryEffect() {
@@ -1014,8 +746,7 @@ function createDiscoveryEffect() {
                         `translate(
                             calc(-50% + ${Math.cos(angle) * distance}px),
                             calc(-50% + ${Math.sin(angle) * distance}px)
-                        )
-                        scale(0)`,
+                        ) scale(0)`,
 
                     opacity: 0
 
@@ -1027,7 +758,8 @@ function createDiscoveryEffect() {
 
                 duration:
                     700 +
-                    Math.random() * 400,
+                    Math.random() *
+                    400,
 
                 easing:
                     "cubic-bezier(.2,.7,.2,1)"
@@ -1060,38 +792,14 @@ finalButton.addEventListener(
     "click",
     async () => {
 
-        /*
-           Segurança:
-           só permite abrir se as quatro
-           descobertas tiverem sido feitas.
-        */
-
-        if (
-            discovered.size !== totalDiscoveries
-        ) {
-
-            return;
-
-        }
-
-
-        /*
-           Troca a música.
-        */
-
         await startFinalMusic();
 
 
-        /*
-           Agora sim muda para a tela final.
-        */
+        switchScreen(
+            "discovery",
+            "finalScreen"
+        );
 
-        showScreen(2);
-
-
-        /*
-           Cria o efeito especial.
-        */
 
         createFinalEffect();
 
@@ -1149,10 +857,6 @@ function createFinalEffect() {
             "3000";
 
 
-        particle.style.pointerEvents =
-            "none";
-
-
         document.body.appendChild(
             particle
         );
@@ -1195,7 +899,8 @@ function createFinalEffect() {
 
                 duration:
                     2500 +
-                    Math.random() * 2000,
+                    Math.random() *
+                    2000,
 
                 easing:
                     "ease-out"
@@ -1213,3 +918,319 @@ function createFinalEffect() {
     }
 
 }
+
+
+/* ======================================================
+   CARROSSEL
+====================================================== */
+
+const carouselSlides =
+    document.querySelectorAll(
+        ".carousel-slide"
+    );
+
+
+const carouselPrev =
+    document.querySelector(
+        "#carouselPrev"
+    );
+
+
+const carouselNext =
+    document.querySelector(
+        "#carouselNext"
+    );
+
+
+const carouselDots =
+    document.querySelector(
+        "#carouselDots"
+    );
+
+
+const carouselCurrent =
+    document.querySelector(
+        "#carouselCurrent"
+    );
+
+
+const carouselTotal =
+    document.querySelector(
+        "#carouselTotal"
+    );
+
+
+let currentSlide = 0;
+
+
+/* ======================================================
+   TOTAL DE FOTOS
+====================================================== */
+
+if (carouselTotal) {
+
+    carouselTotal.textContent =
+        carouselSlides.length;
+
+}
+
+
+/* ======================================================
+   CRIAR INDICADORES
+====================================================== */
+
+if (carouselDots) {
+
+    carouselSlides.forEach(
+        (_, index) => {
+
+            const dot =
+                document.createElement(
+                    "button"
+                );
+
+
+            dot.classList.add(
+                "carousel-dot"
+            );
+
+
+            dot.setAttribute(
+                "aria-label",
+                `Ir para foto ${index + 1}`
+            );
+
+
+            dot.addEventListener(
+                "click",
+                () => {
+
+                    currentSlide =
+                        index;
+
+                    updateCarousel();
+
+                }
+            );
+
+
+            carouselDots.appendChild(
+                dot
+            );
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+   ATUALIZAR CARROSSEL
+====================================================== */
+
+function updateCarousel() {
+
+    carouselSlides.forEach(
+        (slide, index) => {
+
+            slide.classList.toggle(
+                "active",
+                index === currentSlide
+            );
+
+        }
+    );
+
+
+    const dots =
+        document.querySelectorAll(
+            ".carousel-dot"
+        );
+
+
+    dots.forEach(
+        (dot, index) => {
+
+            dot.classList.toggle(
+                "active",
+                index === currentSlide
+            );
+
+        }
+    );
+
+
+    if (carouselCurrent) {
+
+        carouselCurrent.textContent =
+            currentSlide + 1;
+
+    }
+
+}
+
+
+/* ======================================================
+   PRÓXIMA FOTO
+====================================================== */
+
+if (carouselNext) {
+
+    carouselNext.addEventListener(
+        "click",
+        () => {
+
+            currentSlide++;
+
+
+            if (
+                currentSlide >=
+                carouselSlides.length
+            ) {
+
+                currentSlide = 0;
+
+            }
+
+
+            updateCarousel();
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+   FOTO ANTERIOR
+====================================================== */
+
+if (carouselPrev) {
+
+    carouselPrev.addEventListener(
+        "click",
+        () => {
+
+            currentSlide--;
+
+
+            if (
+                currentSlide < 0
+            ) {
+
+                currentSlide =
+                    carouselSlides.length - 1;
+
+            }
+
+
+            updateCarousel();
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+   SWIPE NO CELULAR
+====================================================== */
+
+let touchStartX = 0;
+
+let touchEndX = 0;
+
+
+const carousel =
+    document.querySelector(
+        ".photo-carousel"
+    );
+
+
+if (carousel) {
+
+    carousel.addEventListener(
+        "touchstart",
+        event => {
+
+            touchStartX =
+                event.changedTouches[0].screenX;
+
+        },
+        { passive: true }
+    );
+
+
+    carousel.addEventListener(
+        "touchend",
+        event => {
+
+            touchEndX =
+                event.changedTouches[0].screenX;
+
+
+            handleSwipe();
+
+        },
+        { passive: true }
+    );
+
+}
+
+
+function handleSwipe() {
+
+    const distance =
+        touchEndX - touchStartX;
+
+
+    if (
+        Math.abs(distance) < 50
+    ) {
+
+        return;
+
+    }
+
+
+    if (distance < 0) {
+
+        currentSlide++;
+
+
+        if (
+            currentSlide >=
+            carouselSlides.length
+        ) {
+
+            currentSlide = 0;
+
+        }
+
+    } else {
+
+        currentSlide--;
+
+
+        if (
+            currentSlide < 0
+        ) {
+
+            currentSlide =
+                carouselSlides.length - 1;
+
+        }
+
+    }
+
+
+    updateCarousel();
+
+}
+
+
+/* ======================================================
+   INICIALIZAÇÃO DO CARROSSEL
+====================================================== */
+
+updateCarousel();
