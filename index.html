@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#101010"
+    >
+
+    <title>Ana Júlia — 17</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     LOADER
+====================================================== -->
+
+<div
+    class="loader"
+    id="loader"
+>
+
+    <div class="loader-inner">
+
+        <span class="loader-logo">
+            AJ
+        </span>
+
+        <div class="loader-bar">
+            <span></span>
+        </div>
+
+        <p>
+            preparando uma pequena surpresa...
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- ======================================================
+     TOPO
+====================================================== -->
+
+<header class="topbar">
+
+    <a
+        href="#inicio"
+        class="logo"
+    >
+        AJ<span>.</span>
+    </a>
+
+
+    <button
+        class="music-button"
+        id="musicButton"
+        aria-label="Controlar música"
+    >
+
+        <span>
+            ♪
+        </span>
+
+        <small>
+            música
+        </small>
+
+    </button>
+
+</header>
+
+
+
+<!-- ======================================================
+     PARTÍCULAS
+====================================================== -->
+
+<div
+    class="particles"
+    id="particles"
+></div>
+
+
+
+<!-- ======================================================
+     EXPERIÊNCIA
+====================================================== -->
+
+<main id="experience">
+
+
+<!-- ======================================================
+     TELA 01 — ABERTURA
+====================================================== -->
+
+<section
+    class="screen hero active"
+    id="inicio"
+>
+
+    <div class="hero-glow"></div>
+
+    <div class="hero-content">
+
+        <p class="eyebrow">
+            uma pequena surpresa
+        </p>
+
+
+        <h1>
+
+            Ana
+
+            <br>
+
+            <em>Júlia</em>
+
+        </h1>
+
+
+        <div class="hero-age">
+
+            <strong>
+                17
+            </strong>
+
+            <span>
+                anos
+            </span>
+
+        </div>
+
+
+        <p class="hero-description">
+
+            Hoje não é só mais um dia.
+
+            <br>
+
+            Tem algumas coisas aqui
+            que você precisa descobrir.
+
+        </p>
+
+
+        <button
+            class="primary-button"
+            id="startButton"
+        >
+
+            <span>
+                começar a descobrir
+            </span>
+
+            <strong>
+                →
+            </strong>
+
+        </button>
+
+
+        <span class="hero-hint">
+            toque para começar
+        </span>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======================================================
+     TELA 02 — DESCOBERTAS
+====================================================== -->
+
+<section
+    class="discovery-screen"
+    id="discovery"
+>
+
+    <div class="section-wrap">
+
+
+        <div class="discovery-header">
+
+            <p class="section-tag">
+                UMA PEQUENA HISTÓRIA
+            </p>
+
+            <h2>
+                Você pode
+                <em>explorar.</em>
+            </h2>
+
+            <p class="discovery-description">
+
+                Existem algumas coisas
+                escondidas por aqui.
+
+                <br>
+
+                Descubra todas para desbloquear
+                a última surpresa.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- PROGRESSO -->
+
+        <div class="progress-area">
+
+            <div class="progress-info">
+
+                <span>
+                    descobertas
+                </span>
+
+                <strong id="progressText">
+                    0 / 4
+                </strong>
+
+            </div>
+
+
+            <div class="progress-bar">
+
+                <span
+                    id="progressBar"
+                ></span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CARDS -->
+
+        <div class="discovery-grid">
+
+
+            <!-- MEMÓRIA -->
+
+            <button
+                class="discovery-card"
+                data-card="memory"
+            >
+
+                <span class="card-number">
+                    01
+                </span>
+
+                <span class="card-icon">
+                    ◇
+                </span>
+
+                <h3>
+                    Uma memória
+                </h3>
+
+                <p>
+                    Antes de tudo isso...
+                </p>
+
+                <span class="card-action">
+                    descobrir →
+                </span>
+
+            </button>
+
+
+
+            <!-- 17 -->
+
+            <button
+                class="discovery-card"
+                data-card="seventeen"
+            >
+
+                <span class="card-number">
+                    02
+                </span>
+
+                <span class="card-icon">
+                    17
+                </span>
+
+                <h3>
+                    Uma nova fase
+                </h3>
+
+                <p>
+                    O número de hoje.
+                </p>
+
+                <span class="card-action">
+                    descobrir →
+                </span>
+
+            </button>
+
+
+
+            <!-- NÓS -->
+
+            <button
+                class="discovery-card"
+                data-card="us"
+            >
+
+                <span class="card-number">
+                    03
+                </span>
+
+                <span class="card-icon">
+                    ♡
+                </span>
+
+                <h3>
+                    Nós
+                </h3>
+
+                <p>
+                    Uma história que vem de longe.
+                </p>
+
+                <span class="card-action">
+                    descobrir →
+                </span>
+
+            </button>
+
+
+
+            <!-- PALAVRAS -->
+
+            <button
+                class="discovery-card"
+                data-card="words"
+            >
+
+                <span class="card-number">
+                    04
+                </span>
+
+                <span class="card-icon">
+                    ✦
+                </span>
+
+                <h3>
+                    Algumas palavras
+                </h3>
+
+                <p>
+                    Porque faltava dizer uma coisa.
+                </p>
+
+                <span class="card-action">
+                    descobrir →
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- DESBLOQUEIO FINAL -->
+
+        <div
+            class="final-unlock"
+            id="finalUnlock"
+        >
+
+            <span>
+                ✦
+            </span>
+
+            <p>
+                Você descobriu tudo.
+            </p>
+
+            <button
+                id="finalButton"
+            >
+                abrir última surpresa →
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======================================================
+     MODAL
+====================================================== -->
+
+<div
+    class="experience-modal"
+    id="modal"
+>
+
+    <div class="modal-background"></div>
+
+
+    <div class="modal-content">
+
+        <button
+            class="modal-close"
+            id="modalClose"
+            aria-label="Fechar"
+        >
+            ×
+        </button>
+
+
+
+        <!-- ==================================================
+             MEMÓRIA
+        ================================================== -->
+
+        <div
+            class="modal-page"
+            data-modal="memory"
+        >
+
+            <p class="modal-tag">
+                01 / UMA MEMÓRIA
+            </p>
+
+            <h2>
+                Desde pequenos,
+                <em>não é?</em>
+            </h2>
+
+
+            <div class="modal-photo">
+
+                <img
+                    src="assets/fotos/foto-01.jpg"
+                    alt="Uma lembrança de vocês"
+                >
+
+            </div>
+
+
+            <p class="modal-text">
+
+                A gente se conhece desde pequeno.
+
+                <br><br>
+
+                E é engraçado pensar em quantas
+                coisas mudaram desde aquela época.
+
+                Algumas fases ficaram para trás,
+                mas algumas pessoas continuaram
+                fazendo parte da história.
+
+            </p>
+
+
+            <button
+                class="modal-done"
+                data-complete="memory"
+            >
+
+                guardar essa memória ✓
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             17
+        ================================================== -->
+
+        <div
+            class="modal-page"
+            data-modal="seventeen"
+        >
+
+            <p class="modal-tag">
+                02 / UMA NOVA FASE
+            </p>
+
+
+            <div class="modal-number">
+                17
+            </div>
+
+
+            <h2>
+                Um número.
+                <em>Um novo capítulo.</em>
+            </h2>
+
+
+            <p class="modal-text">
+
+                Dezessete anos.
+
+                <br><br>
+
+                Uma idade cheia de coisas
+                novas para descobrir, lugares
+                para conhecer e histórias que
+                ainda nem começaram.
+
+            </p>
+
+
+            <button
+                class="modal-done"
+                data-complete="seventeen"
+            >
+
+                guardar essa descoberta ✓
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             NÓS
+        ================================================== -->
+
+        <div
+            class="modal-page"
+            data-modal="us"
+        >
+
+            <p class="modal-tag">
+                03 / NÓS
+            </p>
+
+
+            <h2>
+
+                Algumas pessoas
+                <em>crescem com a gente.</em>
+
+            </h2>
+
+
+            <div class="modal-photo landscape">
+
+                <img
+                    src="assets/fotos/foto-07.jpg"
+                    alt="Ana Júlia e você"
+                >
+
+            </div>
+
+
+            <p class="modal-text">
+
+                Não precisa de uma grande
+                explicação.
+
+                <br><br>
+
+                São anos de convivência,
+                fases diferentes e momentos
+                que acabaram construindo uma
+                história que vale a pena guardar.
+
+            </p>
+
+
+            <button
+                class="modal-done"
+                data-complete="us"
+            >
+
+                guardar essa descoberta ✓
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             PALAVRAS
+        ================================================== -->
+
+        <div
+            class="modal-page"
+            data-modal="words"
+        >
+
+            <p class="modal-tag">
+                04 / ALGUMAS PALAVRAS
+            </p>
+
+
+            <h2>
+
+                Nem tudo precisa
+                <em>de muitas palavras.</em>
+
+            </h2>
+
+
+            <div class="words-card">
+
+                <span>
+                    ✦
+                </span>
+
+
+                <p>
+
+                    Que você continue vivendo
+                    do seu jeito, descobrindo
+                    novas coisas e colecionando
+                    histórias boas.
+
+                    <br><br>
+
+                    E que nunca faltem motivos
+                    para olhar para trás e pensar:
+
+                    <br><br>
+
+                    <strong>
+                        "Foi uma época boa."
+                    </strong>
+
+                </p>
+
+            </div>
+
+
+            <button
+                class="modal-done"
+                data-complete="words"
+            >
+
+                guardar essas palavras ✓
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ======================================================
+     TELA 03 — FINAL
+====================================================== -->
+
+<section
+    class="final-screen"
+    id="finalScreen"
+>
+
+    <div class="final-glow"></div>
+
+
+    <div class="final-content">
+
+        <p class="section-tag">
+            VOCÊ CHEGOU ATÉ AQUI
+        </p>
+
+
+        <div class="final-age">
+            17
+        </div>
+
+
+        <h2>
+
+            Feliz aniversário,
+
+            <br>
+
+            <em>Ana Júlia.</em>
+
+        </h2>
+
+
+        <p class="final-message">
+
+            Que essa nova fase seja cheia
+            de coisas boas, novas experiências,
+            pessoas incríveis e muitos motivos
+            para sorrir.
+
+            <br><br>
+
+            E que, daqui a alguns anos,
+            ainda existam muitas histórias
+            para acrescentar a essa.
+
+        </p>
+
+
+        <div class="final-photo">
+
+            <img
+                src="assets/fotos/foto-08.jpg"
+                alt="Ana Júlia"
+            >
+
+        </div>
+
+
+        <p class="final-signature">
+
+            Que venham os próximos capítulos. ✦
+
+        </p>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- ======================================================
+     ÁUDIO
+====================================================== -->
+
+<audio
+    id="birthdayMusic"
+    preload="auto"
+></audio>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
