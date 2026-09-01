@@ -36,21 +36,14 @@ const particles = document.querySelector("#particles");
 
 
 /* ======================================================
-   CONFIGURAÇÃO DAS MÚSICAS
+   CONFIGURAÇÃO DA MÚSICA
 ====================================================== */
 
 const MUSIC_MAIN =
-    "assets/musica/musica-principal.mp3";
+    "assets/musica/mirrors.mp3";
 
-const MUSIC_FINAL =
-    "assets/musica/musica-final.mp3";
-
-
-let currentMusic = null;
 
 let musicStarted = false;
-
-let musicChanging = false;
 
 
 /* ======================================================
@@ -77,7 +70,9 @@ window.addEventListener("load", () => {
 
     setTimeout(() => {
 
-        loader.classList.add("hidden");
+        if (loader) {
+            loader.classList.add("hidden");
+        }
 
     }, 1200);
 
@@ -89,6 +84,11 @@ window.addEventListener("load", () => {
 ====================================================== */
 
 function createParticles() {
+
+    if (!particles) {
+        return;
+    }
+
 
     const amount =
         window.innerWidth < 600
@@ -143,16 +143,21 @@ createParticles();
    INICIAR EXPERIÊNCIA
 ====================================================== */
 
-startButton.addEventListener("click", () => {
+if (startButton) {
 
-    switchScreen(
-        "inicio",
-        "discovery"
-    );
+    startButton.addEventListener("click", () => {
 
-    startMainMusic();
+        switchScreen(
+            "inicio",
+            "discovery"
+        );
 
-});
+
+        startMainMusic();
+
+    });
+
+}
 
 
 /* ======================================================
@@ -167,14 +172,13 @@ function switchScreen(
     const from =
         document.getElementById(fromId);
 
+
     const to =
         document.getElementById(toId);
 
 
     if (!from || !to) {
-
         return;
-
     }
 
 
@@ -199,21 +203,25 @@ function switchScreen(
 
 async function startMainMusic() {
 
-    if (musicStarted) {
-
+    if (!music || musicStarted) {
         return;
-
     }
 
 
     musicStarted = true;
 
-    currentMusic = "main";
+
+    music.src =
+        MUSIC_MAIN;
 
 
-    music.src = MUSIC_MAIN;
+    /*
+       A música fica em loop durante
+       toda a experiência.
+    */
 
     music.loop = true;
+
 
     music.volume = 0;
 
@@ -222,7 +230,15 @@ async function startMainMusic() {
 
         await music.play();
 
-        musicButton.classList.add("playing");
+
+        if (musicButton) {
+
+            musicButton.classList.add(
+                "playing"
+            );
+
+        }
+
 
         fadeVolume(
             0,
@@ -230,11 +246,18 @@ async function startMainMusic() {
             1800
         );
 
+
     } catch (error) {
 
         console.log(
-            "O navegador bloqueou a reprodução automática."
+            "O navegador bloqueou a reprodução da música."
         );
+
+        /*
+           Como o play acontece depois de um
+           clique do usuário, normalmente o
+           navegador permitirá a reprodução.
+        */
 
     }
 
@@ -250,6 +273,11 @@ function fadeVolume(
     to,
     duration
 ) {
+
+    if (!music) {
+        return;
+    }
+
 
     const start =
         performance.now();
@@ -304,118 +332,54 @@ function fadeVolume(
 
 
 /* ======================================================
-   MÚSICA FINAL
-====================================================== */
-
-async function startFinalMusic() {
-
-    if (musicChanging) {
-
-        return;
-
-    }
-
-
-    musicChanging = true;
-
-
-    fadeVolume(
-        music.volume,
-        0,
-        1400
-    );
-
-
-    await new Promise(resolve => {
-
-        setTimeout(
-            resolve,
-            1500
-        );
-
-    });
-
-
-    music.pause();
-
-    music.currentTime = 0;
-
-    music.src = MUSIC_FINAL;
-
-    music.loop = true;
-
-    music.volume = 0;
-
-    currentMusic = "final";
-
-
-    try {
-
-        await music.play();
-
-        musicButton.classList.add(
-            "playing"
-        );
-
-
-        fadeVolume(
-            0,
-            0.72,
-            2200
-        );
-
-    } catch (error) {
-
-        console.log(
-            "A música final não pôde ser reproduzida."
-        );
-
-    }
-
-
-    musicChanging = false;
-
-}
-
-
-/* ======================================================
    CONTROLE MANUAL DA MÚSICA
 ====================================================== */
 
-musicButton.addEventListener(
-    "click",
-    async () => {
+if (musicButton) {
 
-        if (music.paused) {
+    musicButton.addEventListener(
+        "click",
+        async () => {
 
-            try {
+            if (!music) {
+                return;
+            }
 
-                await music.play();
 
-                musicButton.classList.add(
+            if (music.paused) {
+
+                try {
+
+                    await music.play();
+
+
+                    musicButton.classList.add(
+                        "playing"
+                    );
+
+                } catch (error) {
+
+                    console.log(
+                        "Não foi possível reproduzir a música."
+                    );
+
+                }
+
+            } else {
+
+                music.pause();
+
+
+                musicButton.classList.remove(
                     "playing"
-                );
-
-            } catch (error) {
-
-                console.log(
-                    "Não foi possível reproduzir a música."
                 );
 
             }
 
-        } else {
-
-            music.pause();
-
-            musicButton.classList.remove(
-                "playing"
-            );
-
         }
+    );
 
-    }
-);
+}
 
 
 /* ======================================================
@@ -446,6 +410,11 @@ cards.forEach(card => {
 
 function openModal(name) {
 
+    if (!modal) {
+        return;
+    }
+
+
     modalPages.forEach(page => {
 
         page.classList.remove(
@@ -468,10 +437,16 @@ function openModal(name) {
 
     modal.classList.add("open");
 
+
     document.body.classList.add(
         "locked"
     );
 
+
+    /*
+       Se o modal possuir carrossel,
+       atualiza a posição da foto.
+    */
 
     if (name === "photos") {
 
@@ -488,6 +463,11 @@ function openModal(name) {
 
 function closeModal() {
 
+    if (!modal) {
+        return;
+    }
+
+
     modal.classList.remove(
         "open"
     );
@@ -500,36 +480,44 @@ function closeModal() {
 }
 
 
-modalClose.addEventListener(
-    "click",
-    closeModal
-);
+if (modalClose) {
+
+    modalClose.addEventListener(
+        "click",
+        closeModal
+    );
+
+}
 
 
 /* ======================================================
    CLICAR FORA DO MODAL
 ====================================================== */
 
-modal.addEventListener(
-    "click",
-    event => {
+if (modal) {
 
-        if (
-            event.target.classList.contains(
-                "modal-background"
-            )
-        ) {
+    modal.addEventListener(
+        "click",
+        event => {
 
-            closeModal();
+            if (
+                event.target.classList.contains(
+                    "modal-background"
+                )
+            ) {
+
+                closeModal();
+
+            }
 
         }
+    );
 
-    }
-);
+}
 
 
 /* ======================================================
-   ESC
+   TECLA ESC
 ====================================================== */
 
 document.addEventListener(
@@ -563,6 +551,7 @@ doneButtons.forEach(button => {
 
 
             completeDiscovery(name);
+
 
             closeModal();
 
@@ -602,6 +591,7 @@ function completeDiscovery(name) {
             "completed"
         );
 
+
         card.classList.add(
             "discovered"
         );
@@ -610,6 +600,7 @@ function completeDiscovery(name) {
 
 
     updateProgress();
+
 
     createDiscoveryEffect();
 
@@ -622,6 +613,11 @@ function completeDiscovery(name) {
 
 function updateProgress() {
 
+    if (!progressText || !progressBar) {
+        return;
+    }
+
+
     const amount =
         discovered.size;
 
@@ -631,8 +627,7 @@ function updateProgress() {
 
 
     const percentage =
-        (amount / totalDiscoveries) *
-        100;
+        (amount / totalDiscoveries) * 100;
 
 
     progressBar.style.width =
@@ -655,6 +650,11 @@ function updateProgress() {
 ====================================================== */
 
 function unlockFinal() {
+
+    if (!finalUnlock) {
+        return;
+    }
+
 
     finalUnlock.classList.add(
         "unlocked"
@@ -734,10 +734,12 @@ function createDiscoveryEffect() {
             [
 
                 {
+
                     transform:
                         "translate(-50%, -50%) scale(1)",
 
                     opacity: 1
+
                 },
 
                 {
@@ -788,23 +790,24 @@ function createDiscoveryEffect() {
    ABRIR ÚLTIMA SURPRESA
 ====================================================== */
 
-finalButton.addEventListener(
-    "click",
-    async () => {
+if (finalButton) {
 
-        await startFinalMusic();
+    finalButton.addEventListener(
+        "click",
+        () => {
+
+            switchScreen(
+                "discovery",
+                "finalScreen"
+            );
 
 
-        switchScreen(
-            "discovery",
-            "finalScreen"
-        );
+            createFinalEffect();
 
+        }
+    );
 
-        createFinalEffect();
-
-    }
-);
+}
 
 
 /* ======================================================
@@ -855,6 +858,10 @@ function createFinalEffect() {
 
         particle.style.zIndex =
             "3000";
+
+
+        particle.style.pointerEvents =
+            "none";
 
 
         document.body.appendChild(
@@ -1008,6 +1015,7 @@ if (carouselDots) {
                     currentSlide =
                         index;
 
+
                     updateCarousel();
 
                 }
@@ -1029,6 +1037,11 @@ if (carouselDots) {
 ====================================================== */
 
 function updateCarousel() {
+
+    if (!carouselSlides.length) {
+        return;
+    }
+
 
     carouselSlides.forEach(
         (slide, index) => {
@@ -1157,7 +1170,9 @@ if (carousel) {
                 event.changedTouches[0].screenX;
 
         },
-        { passive: true }
+        {
+            passive: true
+        }
     );
 
 
@@ -1172,11 +1187,17 @@ if (carousel) {
             handleSwipe();
 
         },
-        { passive: true }
+        {
+            passive: true
+        }
     );
 
 }
 
+
+/* ======================================================
+   TRATAR SWIPE
+====================================================== */
 
 function handleSwipe() {
 
@@ -1230,7 +1251,7 @@ function handleSwipe() {
 
 
 /* ======================================================
-   INICIALIZAÇÃO DO CARROSSEL
+   INICIALIZAÇÃO
 ====================================================== */
 
 updateCarousel();
