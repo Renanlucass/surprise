@@ -407,13 +407,73 @@
 
     <div class="modal-content">
 
+        <!-- BOTÃO DE FECHAR -->
+
         <button
             class="modal-close"
             id="modalClose"
-            aria-label="Fechar"
+            aria-label="Fechar descoberta"
+            title="Você precisa guardar a descoberta primeiro"
         >
             ×
         </button>
+
+
+        <!-- AVISO / ORIENTAÇÃO -->
+
+        <div
+            class="modal-guide"
+            id="modalGuide"
+        >
+
+            <span class="modal-guide-icon">
+                ✦
+            </span>
+
+            <div>
+
+                <strong>
+                    Uma coisinha antes de sair...
+                </strong>
+
+                <p>
+                    Explore tudo e, quando terminar,
+                    clique em <b>“guardar essa descoberta”</b>
+                    para continuar.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- AVISO AO TENTAR FECHAR -->
+
+        <div
+            class="modal-warning"
+            id="modalWarning"
+            role="alert"
+            aria-live="polite"
+        >
+
+            <span class="modal-warning-icon">
+                👀
+            </span>
+
+            <div>
+
+                <strong>
+                    Ei, ei... calma aí!
+                </strong>
+
+                <p>
+                    Você ainda não guardou essa descoberta.
+                    Termina de explorar e clica no botão lá embaixo. 😏
+                </p>
+
+            </div>
+
+        </div>
 
 
         <!-- ==================================================
@@ -426,7 +486,7 @@
         >
 
             <p class="modal-tag">
-                01 / NOSSAS FOTOS
+                01 / ALGUMAS FOTOS
             </p>
 
 
@@ -441,6 +501,7 @@
             <div class="photo-carousel">
 
                 <div class="carousel-track">
+
                     <div class="carousel-slide active">
 
                         <img
@@ -449,6 +510,7 @@
                         >
 
                     </div>
+
 
                     <div class="carousel-slide">
 
@@ -509,7 +571,8 @@
 
                     </div>
 
-                                        <div class="carousel-slide">
+
+                    <div class="carousel-slide">
 
                         <img
                             src="assets/fotos/image8.webp"
@@ -518,7 +581,8 @@
 
                     </div>
 
-                                        <div class="carousel-slide">
+
+                    <div class="carousel-slide">
 
                         <img
                             src="assets/fotos/image9.jpg"
@@ -527,7 +591,8 @@
 
                     </div>
 
-                                        <div class="carousel-slide">
+
+                    <div class="carousel-slide">
 
                         <img
                             src="assets/fotos/image10.jpg"
@@ -536,7 +601,8 @@
 
                     </div>
 
-                                        <div class="carousel-slide">
+
+                    <div class="carousel-slide">
 
                         <img
                             src="assets/fotos/image11.jpg"
@@ -545,7 +611,8 @@
 
                     </div>
 
-                                        <div class="carousel-slide">
+
+                    <div class="carousel-slide">
 
                         <img
                             src="assets/fotos/image12.jpg"
@@ -554,7 +621,8 @@
 
                     </div>
 
-                                        <div class="carousel-slide">
+
+                    <div class="carousel-slide">
 
                         <img
                             src="assets/fotos/image13.jpg"
@@ -563,7 +631,8 @@
 
                     </div>
 
-                                        <div class="carousel-slide">
+
+                    <div class="carousel-slide">
 
                         <img
                             src="assets/fotos/image14.jpg"
@@ -572,7 +641,8 @@
 
                     </div>
 
-                                                            <div class="carousel-slide">
+
+                    <div class="carousel-slide">
 
                         <img
                             src="assets/fotos/image15.jpg"
@@ -581,7 +651,8 @@
 
                     </div>
 
-                                                            <div class="carousel-slide">
+
+                    <div class="carousel-slide">
 
                         <img
                             src="assets/fotos/image16.jpg"
@@ -589,6 +660,7 @@
                         >
 
                     </div>
+
 
                     <div class="carousel-slide">
 
@@ -598,7 +670,6 @@
                         >
 
                     </div>
-                    
 
                 </div>
 
@@ -636,6 +707,7 @@
 
 
             <p class="carousel-counter">
+
                 <span id="carouselCurrent">
                     1
                 </span>
@@ -643,14 +715,15 @@
                 /
 
                 <span id="carouselTotal">
-                    7
+                    17
                 </span>
+
             </p>
 
 
             <p class="modal-text">
 
-                Algumas fotos que fazem parte dessa história
+                Algumas fotos que fazem parte dessa história.
 
                 <br><br>
 
@@ -659,20 +732,24 @@
 
             </p>
 
-            
-            <p class="modal-text">
 
-                Clica aqui para guardar a descoberta 👇
+            <div class="save-discovery">
 
-            </p>
+                <p>
+                    Terminou de olhar?
+                    <br>
+                    Então guarda essa descoberta 👇
+                </p>
 
 
-            <button
-                class="modal-done"
-                data-complete="photos"
-            >
-                guardar essas lembranças ✓
-            </button>
+                <button
+                    class="modal-done"
+                    data-complete="photos"
+                >
+                    guardar essas lembranças ✓
+                </button>
+
+            </div>
 
         </div>
 
@@ -730,12 +807,23 @@
             </p>
 
 
-            <button
-                class="modal-done"
-                data-complete="seventeen"
-            >
-                guardar essa descoberta ✓
-            </button>
+            <div class="save-discovery">
+
+                <p>
+                    Gostou da descoberta?
+                    <br>
+                    Então guarda ela para continuar 👇
+                </p>
+
+
+                <button
+                    class="modal-done"
+                    data-complete="seventeen"
+                >
+                    guardar essa descoberta ✓
+                </button>
+
+            </div>
 
         </div>
 
@@ -803,12 +891,23 @@
             </div>
 
 
-            <button
-                class="modal-done"
-                data-complete="message"
-            >
-                guardar a mensagem ✓
-            </button>
+            <div class="save-discovery">
+
+                <p>
+                    Leu até o fim?
+                    <br>
+                    Então guarda a mensagem 👇
+                </p>
+
+
+                <button
+                    class="modal-done"
+                    data-complete="message"
+                >
+                    guardar a mensagem ✓
+                </button>
+
+            </div>
 
         </div>
 
@@ -832,7 +931,7 @@
     <div class="final-content">
 
         <p class="section-tag">
-            VOCÊ CHEGOU ATÉ AQUI
+            UMA ÚLTIMA COISA...
         </p>
 
 
@@ -852,37 +951,54 @@
         </h2>
 
 
-        <p class="final-message">
+        <div class="final-reveal">
 
-            Que essa nova fase seja cheia
-            de coisas boas, novas experiências,
-            pessoas incríveis e muitos motivos
-            para sorrir.
+            <br>
 
-            <br><br>
+            <p class="reveal-small">
+                MAS...
+            </p>
 
-            E que, daqui a alguns anos,
-            ainda existam muitas histórias
-            para acrescentar a essa.
+            <br>
 
-        </p>
+            <h3>
+                Eu ainda prefiro
+                <em>Laurinha</em>
+            </h3>
 
 
-        <div class="final-photo">
+            <div class="final-photo">
 
-            <img
-                src="assets/fotos/image-principal.jpg"
-                alt="Ana Júlia"
-            >
+                <img
+                    src="assets/fotos/laura.jpg"
+                    alt="Irmã da Ana Júlia"
+                >
+
+            </div>
+
+
+            <p class="reveal-joke">
+
+                KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+
+            </p>
 
         </div>
 
 
         <p class="final-signature">
 
-            Eu ainda prefiro Ana Laura 🖕🖕🖕 ✦
+            Vc ta quase chegando nos pés de Laurinha, tenha fé.❤️
+
+            <br><br>
 
         </p>
+
+        <h3>
+            Chama Jumenta🖕
+        </h3>
+
+        <span>✦</span>
 
     </div>
 

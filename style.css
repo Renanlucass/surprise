@@ -1124,6 +1124,10 @@ button {
 }
 
 
+/* ======================================================
+   BOTÃO FECHAR DO MODAL
+====================================================== */
+
 .modal-close {
 
     position: absolute;
@@ -1133,16 +1137,278 @@ button {
 
     z-index: 5;
 
-    border: 0;
+    width: 42px;
+    height: 42px;
 
-    background: none;
+    border: 1px solid transparent;
+
+    background: transparent;
+
+    border-radius: 50%;
 
     font-size: 2rem;
+
+    line-height: 1;
+
+    color: var(--black);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        opacity .3s ease,
+        background .3s ease,
+        transform .3s ease,
+        border-color .3s ease;
+
+}
+
+
+/*
+   Enquanto a descoberta não foi guardada,
+   o X fica visualmente "bloqueado".
+*/
+
+.modal-close.blocked {
+
+    opacity: .35;
+
+}
+
+
+.modal-close.blocked::after {
+
+    content: "guardar primeiro";
+
+    position: absolute;
+
+    top: 46px;
+    right: 0;
+
+    white-space: nowrap;
+
+    font-family: var(--sans);
+
+    font-size: .5rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: .08em;
+
+    color: var(--muted);
+
+    opacity: 0;
+
+    transform: translateY(-4px);
+
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+
+}
+
+
+.modal-close.blocked:hover {
+
+    opacity: .7;
+
+}
+
+
+.modal-close.blocked:hover::after {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+}
+
+
+.modal-close:not(.blocked):hover {
+
+    background: var(--black);
+
+    color: white;
+
+    transform: rotate(90deg);
+
+}
+
+
+/* ======================================================
+   ORIENTAÇÃO DO MODAL
+====================================================== */
+
+.modal-guide {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 14px;
+
+    margin-bottom: 32px;
+
+    padding: 15px 17px;
+
+    border: 1px solid var(--line);
+
+    background: rgba(255,255,255,.35);
+
+}
+
+
+.modal-guide-icon {
+
+    flex-shrink: 0;
+
+    color: var(--gold);
+
+    font-size: 1rem;
+
+    margin-top: 2px;
+
+}
+
+
+.modal-guide strong {
+
+    display: block;
+
+    font-size: .68rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: .08em;
+
+}
+
+
+.modal-guide p {
+
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: .67rem;
+
+    line-height: 1.6;
+
+}
+
+
+.modal-guide b {
 
     color: var(--black);
 
 }
 
+
+/* ======================================================
+   AVISO AO TENTAR FECHAR
+====================================================== */
+
+.modal-warning {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 20px;
+
+    z-index: 20;
+
+    width: min(
+        520px,
+        calc(100% - 40px)
+    );
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 13px;
+
+    padding: 15px 18px;
+
+    background: var(--black);
+
+    color: white;
+
+    border: 1px solid rgba(180,154,120,.45);
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.3);
+
+    transform:
+        translate(-50%, -25px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity .35s ease,
+        transform .45s cubic-bezier(.2,.7,.2,1),
+        visibility .35s ease;
+
+}
+
+
+.modal-warning.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translate(-50%, 0);
+
+}
+
+
+.modal-warning-icon {
+
+    flex-shrink: 0;
+
+    font-size: 1.1rem;
+
+}
+
+
+.modal-warning strong {
+
+    display: block;
+
+    font-family: var(--serif);
+
+    font-size: 1rem;
+
+    font-weight: 500;
+
+}
+
+
+.modal-warning p {
+
+    margin-top: 4px;
+
+    color: rgba(255,255,255,.6);
+
+    font-size: .65rem;
+
+    line-height: 1.6;
+
+}
+
+
+/* ======================================================
+   PÁGINAS DO MODAL
+====================================================== */
 
 .modal-page {
 
@@ -1444,7 +1710,39 @@ button {
 }
 
 
+/* ======================================================
+   ÁREA DE GUARDAR DESCOBERTA
+====================================================== */
+
+.save-discovery {
+
+    text-align: center;
+
+    margin-top: 45px;
+
+    padding-top: 30px;
+
+    border-top: 1px solid var(--line);
+
+}
+
+
+.save-discovery p {
+
+    color: var(--muted);
+
+    font-size: .68rem;
+
+    line-height: 1.7;
+
+    margin-bottom: 14px;
+
+}
+
+
 .modal-done {
+
+    position: relative;
 
     border: 1px solid var(--black);
 
@@ -1452,7 +1750,7 @@ button {
 
     color: var(--black);
 
-    padding: 13px 18px;
+    padding: 13px 20px;
 
     border-radius: 100px;
 
@@ -1462,7 +1760,11 @@ button {
 
     letter-spacing: .1em;
 
-    transition: .3s;
+    transition:
+        background .3s ease,
+        color .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
 
 }
 
@@ -1472,6 +1774,50 @@ button {
     background: var(--black);
 
     color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.15);
+
+}
+
+
+/*
+   Pequena animação para chamar atenção
+   para o botão sem ficar exagerado.
+*/
+
+.modal-page.active .modal-done {
+
+    animation:
+        saveButtonPulse 2.5s ease-in-out infinite;
+
+}
+
+
+.modal-page.active .modal-done:hover {
+
+    animation: none;
+
+}
+
+
+@keyframes saveButtonPulse {
+
+    0%, 100% {
+
+        box-shadow:
+            0 0 0 rgba(180,154,120,0);
+
+    }
+
+    50% {
+
+        box-shadow:
+            0 0 0 7px rgba(180,154,120,.08);
+
+    }
 
 }
 
@@ -1679,7 +2025,7 @@ button {
 
 .final-photo img {
 
-    width: 100%;
+    width: 12rem;
     height: 100%;
 
     object-fit: cover;
@@ -1864,6 +2210,63 @@ body:has(#finalScreen.active) .music-button {
     }
 
 
+    .modal-guide {
+
+        margin-bottom: 25px;
+
+        padding: 13px 14px;
+
+    }
+
+
+    .modal-guide p {
+
+        font-size: .62rem;
+
+    }
+
+
+    .modal-warning {
+
+        top: 12px;
+
+        width:
+            calc(100% - 24px);
+
+        padding: 13px 14px;
+
+    }
+
+
+    .modal-warning strong {
+
+        font-size: .9rem;
+
+    }
+
+
+    .modal-warning p {
+
+        font-size: .61rem;
+
+    }
+
+
+    .modal-close {
+
+        top: 10px;
+        right: 12px;
+
+    }
+
+
+    .modal-close.blocked::after {
+
+        display: none;
+
+    }
+
+
     .photo-carousel {
 
         aspect-ratio: 4 / 5;
@@ -1896,6 +2299,22 @@ body:has(#finalScreen.active) .music-button {
     .words-card {
 
         padding: 25px;
+
+    }
+
+
+    .save-discovery {
+
+        margin-top: 35px;
+
+        padding-top: 25px;
+
+    }
+
+
+    .modal-done {
+
+        max-width: 100%;
 
     }
 

@@ -34,6 +34,8 @@ const music = document.querySelector("#birthdayMusic");
 
 const particles = document.querySelector("#particles");
 
+const modalWarning = document.querySelector("#modalWarning");
+
 
 /* ======================================================
    CONFIGURAÇÃO DA MÚSICA
@@ -53,6 +55,19 @@ let musicStarted = false;
 const discovered = new Set();
 
 const totalDiscoveries = 3;
+
+
+/*
+   Guarda qual descoberta está atualmente
+   aberta no modal.
+
+   Exemplo:
+   "photos"
+   "seventeen"
+   "message"
+*/
+
+let currentDiscovery = null;
 
 
 /* ======================================================
@@ -215,11 +230,6 @@ async function startMainMusic() {
         MUSIC_MAIN;
 
 
-    /*
-       A música fica em loop durante
-       toda a experiência.
-    */
-
     music.loop = true;
 
 
@@ -252,12 +262,6 @@ async function startMainMusic() {
         console.log(
             "O navegador bloqueou a reprodução da música."
         );
-
-        /*
-           Como o play acontece depois de um
-           clique do usuário, normalmente o
-           navegador permitirá a reprodução.
-        */
 
     }
 
@@ -415,6 +419,13 @@ function openModal(name) {
     }
 
 
+    /*
+       Guarda qual descoberta está aberta.
+    */
+
+    currentDiscovery = name;
+
+
     modalPages.forEach(page => {
 
         page.classList.remove(
@@ -433,6 +444,20 @@ function openModal(name) {
         }
 
     });
+
+
+    /*
+       Esconde qualquer aviso antigo.
+    */
+
+    hideModalWarning();
+
+
+    /*
+       Atualiza visualmente o botão de fechar.
+    */
+
+    updateCloseButton();
 
 
     modal.classList.add("open");
@@ -458,15 +483,138 @@ function openModal(name) {
 
 
 /* ======================================================
+   ATUALIZAR BOTÃO DE FECHAR
+====================================================== */
+
+function updateCloseButton() {
+
+    if (!modalClose || !currentDiscovery) {
+        return;
+    }
+
+
+    const alreadyDiscovered =
+        discovered.has(
+            currentDiscovery
+        );
+
+
+    modalClose.classList.toggle(
+        "blocked",
+        !alreadyDiscovered
+    );
+
+
+    modalClose.setAttribute(
+        "aria-label",
+        alreadyDiscovered
+            ? "Fechar descoberta"
+            : "Você precisa guardar esta descoberta antes de fechar"
+    );
+
+}
+
+
+/* ======================================================
+   AVISO DE TENTATIVA DE SAÍDA
+====================================================== */
+
+function showModalWarning() {
+
+    if (!modalWarning) {
+        return;
+    }
+
+
+    modalWarning.classList.remove(
+        "show"
+    );
+
+
+    /*
+       Pequeno delay para permitir
+       a animação acontecer novamente
+       caso ela tente fechar mais de uma vez.
+    */
+
+    requestAnimationFrame(() => {
+
+        modalWarning.classList.add(
+            "show"
+        );
+
+    });
+
+
+    /*
+       Remove automaticamente depois de alguns segundos.
+    */
+
+    clearTimeout(
+        window.modalWarningTimeout
+    );
+
+
+    window.modalWarningTimeout =
+        setTimeout(() => {
+
+            hideModalWarning();
+
+        }, 5000);
+
+}
+
+
+function hideModalWarning() {
+
+    if (!modalWarning) {
+        return;
+    }
+
+
+    modalWarning.classList.remove(
+        "show"
+    );
+
+}
+
+
+/* ======================================================
    FECHAR MODAL
 ====================================================== */
 
 function closeModal() {
 
-    if (!modal) {
+    if (!modal || !currentDiscovery) {
         return;
     }
 
+
+    /*
+       A descoberta ainda não foi guardada.
+
+       Portanto, NÃO fecha o modal.
+    */
+
+    if (
+        !discovered.has(
+            currentDiscovery
+        )
+    ) {
+
+        showModalWarning();
+
+        updateCloseButton();
+
+        return;
+
+    }
+
+
+    /*
+       Só chega aqui depois que
+       a descoberta foi guardada.
+    */
 
     modal.classList.remove(
         "open"
@@ -477,14 +625,28 @@ function closeModal() {
         "locked"
     );
 
+
+    hideModalWarning();
+
+
+    currentDiscovery = null;
+
 }
 
+
+/* ======================================================
+   BOTÃO DE FECHAR
+====================================================== */
 
 if (modalClose) {
 
     modalClose.addEventListener(
         "click",
-        closeModal
+        () => {
+
+            closeModal();
+
+        }
     );
 
 }
@@ -525,8 +687,12 @@ document.addEventListener(
     event => {
 
         if (
-            event.key === "Escape"
+            event.key === "Escape" &&
+            modal &&
+            modal.classList.contains("open")
         ) {
+
+            event.preventDefault();
 
             closeModal();
 
@@ -552,6 +718,11 @@ doneButtons.forEach(button => {
 
             completeDiscovery(name);
 
+
+            /*
+               A descoberta foi registrada
+               antes de tentar fechar.
+            */
 
             closeModal();
 
@@ -595,6 +766,21 @@ function completeDiscovery(name) {
         card.classList.add(
             "discovered"
         );
+
+    }
+
+
+    /*
+       Atualiza o botão de fechar.
+    */
+
+    if (
+        currentDiscovery === name
+    ) {
+
+        updateCloseButton();
+
+        hideModalWarning();
 
     }
 
@@ -795,6 +981,21 @@ if (finalButton) {
     finalButton.addEventListener(
         "click",
         () => {
+
+            /*
+               Segurança extra:
+               a surpresa final só pode ser aberta
+               quando as 3 descobertas estiverem completas.
+            */
+
+            if (
+                discovered.size !== totalDiscoveries
+            ) {
+
+                return;
+
+            }
+
 
             switchScreen(
                 "discovery",
